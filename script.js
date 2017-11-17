@@ -17,10 +17,17 @@ class App extends React.Component {
     const url = `https://api.github.com/search/users?q=${searchText}`;
     fetch(url)
       .then(response => response.json())
-      .then(responseJson => this.setState({users: responseJson.items}));
-  }
-
-  render() {
+      .then(responseJson => this.setState({users: responseJson.items}))
+      
+      //.catch(console.log('Sorry...'))  not this way
+      .then(console.log(this.state.users.length))
+      if (this.state.users.length == 0) {
+        console.log('Sorry...no users');
+        alert("Sorry...no users");  
+      }
+   }  
+  
+   render() {
     return (
       <div>
         <form onSubmit={event => this.onSubmit(event)}>

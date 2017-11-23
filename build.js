@@ -42,12 +42,10 @@ var App = function (_React$Component) {
       }).then(function (responseJson) {
         return _this2.setState({ users: responseJson.items });
       })
-
-      //.catch(console.log('Sorry...'))  not this way
+      //.catch(console.log('Sorry...no users'))  not this time :)
       .then(console.log(this.state.users.length));
       if (this.state.users.length == 0) {
         console.log('Sorry...no users');
-        alert("Sorry...no users");
       }
     }
   }, {
@@ -75,6 +73,12 @@ var App = function (_React$Component) {
               return _this3.onChangeHandle(event);
             },
             value: this.state.searchText })
+        ),
+        React.createElement(
+          'h2',
+          null,
+          'Users found: ',
+          this.state.users.length
         ),
         React.createElement(UsersList, { users: this.state.users })
       );

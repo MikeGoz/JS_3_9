@@ -3,7 +3,7 @@ class App extends React.Component {
     super();
     this.state = {
       searchText: '',
-      users: []
+      users: [],
     };
   }
 
@@ -18,16 +18,14 @@ class App extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(responseJson => this.setState({users: responseJson.items}))
-      
-      //.catch(console.log('Sorry...'))  not this way
+      //.catch(console.log('Sorry...no users'))  not this time :)
       .then(console.log(this.state.users.length))
-      if (this.state.users.length == 0) {
-        console.log('Sorry...no users');
-        alert("Sorry...no users");  
-      }
-   }  
+    if (this.state.users.length == 0) {
+      console.log('Sorry...no users');
+    }
+  }  
   
-   render() {
+  render() {
     return (
       <div>
         <form onSubmit={event => this.onSubmit(event)}>
@@ -38,7 +36,8 @@ class App extends React.Component {
             onChange={event => this.onChangeHandle(event)}
             value={this.state.searchText}/>
         </form>
-        <UsersList users={this.state.users}/>
+        <h2>Users found: {this.state.users.length}</h2>
+        <UsersList users = {this.state.users}/>
       </div>
     );
   }
@@ -70,4 +69,4 @@ class User extends React.Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('root'));
+  document.getElementById('root')); 

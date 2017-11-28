@@ -36,7 +36,7 @@ class App extends React.Component {
             onChange={event => this.onChangeHandle(event)}
             value={this.state.searchText}/>
         </form>
-        <NoUserFound/>>
+        <h2>Users found: {this.state.users.length}</h2>
         <UsersList users = {this.state.users}/>
       </div>
     );
@@ -67,14 +67,4 @@ class User extends React.Component {
   }
 }
 
-class NoUserFound extends React.Component {
-  render() {
-    if (this.props.users.length == 0){
-      return (
-        <h1>Sorry, no users</h1>
-      );
-    }
-  }
-}
- 
 ReactDOM.render(<App />, document.getElementById('root')); 

@@ -74,12 +74,8 @@ var App = function (_React$Component) {
             },
             value: this.state.searchText })
         ),
-        React.createElement(
-          'h2',
-          null,
-          'Users found: ',
-          this.state.users.length
-        ),
+        React.createElement(NoUserFound, null),
+        '>',
         React.createElement(UsersList, { users: this.state.users })
       );
     }
@@ -144,6 +140,31 @@ var User = function (_React$Component3) {
   }]);
 
   return User;
+}(React.Component);
+
+var NoUserFound = function (_React$Component4) {
+  _inherits(NoUserFound, _React$Component4);
+
+  function NoUserFound() {
+    _classCallCheck(this, NoUserFound);
+
+    return _possibleConstructorReturn(this, (NoUserFound.__proto__ || Object.getPrototypeOf(NoUserFound)).apply(this, arguments));
+  }
+
+  _createClass(NoUserFound, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.users.length) {
+        return React.createElement(
+          'h1',
+          null,
+          'Sorry, no users'
+        );
+      }
+    }
+  }]);
+
+  return NoUserFound;
 }(React.Component);
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));

@@ -4,6 +4,7 @@ class App extends React.Component {
     this.state = {
       searchText: '',
       users: [],
+      searchDone: false
     };
   }
 
@@ -17,14 +18,10 @@ class App extends React.Component {
     const url = `https://api.github.com/search/users?q=${searchText}`;
     fetch(url)
       .then(response => response.json())
-      .then(responseJson => this.setState({users: responseJson.items}))
-      //.catch(console.log('Sorry...no users'))  not this time :)
-      .then(console.log(this.state.users.length))
-    if (this.state.users.length == 0) {
-      console.log('Sorry...no users');
-    }
+      .then(responseJson => this.setState({ users: responseJson.items, searchDone: true }))
+      .catch(err => this.setState({ users: [], searchDone: true }))
   }  
-  
+
   render() {
     return (
       <div>
@@ -36,8 +33,7 @@ class App extends React.Component {
             onChange={event => this.onChangeHandle(event)}
             value={this.state.searchText}/>
         </form>
-        <NoUserFound/>>
-        <UsersList users = {this.state.users}/>
+        { this.state.users.length === 0 && this.state.searchDone ? <NoUserFound /> : <UsersList users={this.state.users}/> }
       </div>
     );
   }
@@ -69,11 +65,7 @@ class User extends React.Component {
 
 class NoUserFound extends React.Component {
   render() {
-    if (this.props.users.length == 0){
-      return (
-        <h1>Sorry, no users</h1>
-      );
-    }
+    return <h1>Sorry, no users</h1>;
   }
 }
  
